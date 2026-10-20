@@ -1,0 +1,56 @@
+.container {
+  padding: 40px;
+  background: radial-gradient(circle at center, #0d0d0d, #1a0033, #001f4d);
+  min-height: 100vh;
+  color: #fff;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 0px 0px 12px #8000ff;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.table th {
+  background: linear-gradient(90deg, #8000ff, #6004a2);
+  color: #fff;
+}
+
+.table tr:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.backButton {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.backButton button {
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #6f00c5, #000000);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.backButton button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #7000cb, #a64dff);
+}

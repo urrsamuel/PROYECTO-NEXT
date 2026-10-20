@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model apartamento {
+  id_apartamento     Int     @id @default(autoincrement())
+  numero_apartamento String  @db.VarChar(10)
+  torre_id           Int?
+  torres             torres? @relation(fields: [torre_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model estado_reserva {
+  id_estado     Int       @id @default(autoincrement())
+  nombre_estado String    @db.VarChar(100)
+  reserva       reserva[]
+}
+
+model reserva {
+  id_reserva        Int             @id @default(autoincrement())
+  fecha             DateTime        @db.Date
+  residente_id      Int?
+  salon_id          Int?
+  estado_reserva_id Int?
+  estado_reserva    estado_reserva? @relation(fields: [estado_reserva_id], references: [id_estado], onDelete: NoAction, onUpdate: NoAction)
+  residente         residente?      @relation(fields: [residente_id], references: [id_residente], onDelete: NoAction, onUpdate: NoAction)
+  salon             salon?          @relation(fields: [salon_id], references: [id_salon], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model residente {
+  id_residente   Int       @id @default(autoincrement())
+  nombre         String    @db.VarChar(100)
+  telefono       String    @db.VarChar(20)
+  correo         String    @db.VarChar(100)
+  apartamento_id Int?
+  reserva        reserva[]
+}
+
+model salon {
+  id_salon     Int       @id @default(autoincrement())
+  nombre_salon String    @db.VarChar(100)
+  capacidad    Int
+  reserva      reserva[]
+}
+
+model torres {
+  id          Int           @id @default(autoincrement())
+  nombre      String        @db.VarChar(100)
+  apartamento apartamento[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model formulario {
+  id_usuario       BigInt   @id @default(autoincrement())
+  created_at       DateTime @default(now()) @db.Timestamptz(6)
+  nombre_usuario   String?
+  apellido_usuario String?
+  correo_usuario   String?  @db.VarChar
+}
